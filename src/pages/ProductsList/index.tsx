@@ -4,13 +4,12 @@ import {
     Container,
     Header,
     HeaderContent,
-    Profile,
+    MenuBar,
     Content,
     Schedule,
-    NextAppointment,
     Section,
+    ProductsContainer,
     Appointment,
-    Calendar,
 } from './styles';
 import logoImg from '../../assets/logo.svg';
 
@@ -32,82 +31,36 @@ interface Appointment {
 const Dashboard: React.FC = () => {
     const [appointments, setAppointments] = useState<Appointment[]>([]);
 
-    // useEffect(() => {
-    //     api.get<Appointment[]>('/appointments/me', {
-    //         params: {
-    //             year: selectedDate.getFullYear(),
-    //             month: selectedDate.getMonth() + 1,
-    //             day: selectedDate.getDate(),
-    //         },
-    //     }).then((response) => {
-    //         const appointmentsFormatted = response.data.map((appointment) => {
-    //             return {
-    //                 ...appointment,
-    //                 hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
-    //             };
-    //         });
-    //         setAppointments(appointmentsFormatted);
-    //     });
-    // }, [selectedDate]);
-
-    //    const nextAppointment = useMemo(() => {
-    //         return appointments.find((appointment) =>
-    //             isAfter(parseISO(appointment.date), new Date()),
-    //         );
-    //     }, [appointments]);
-
     return (
         <Container>
             <Header>
                 <HeaderContent>
                     <img src={logoImg} alt="GoBarber" />
                 </HeaderContent>
+
+                <MenuBar>
+                    <text>VERDURAS</text>
+                </MenuBar>
             </Header>
 
             <Content>
                 <Schedule>
-                    <h1>Horários Agendados</h1>
                     <Section>
-                        <strong>Manhã</strong>
-
-                        {/* {morningAppointments.map((appointment) => (
-                            <Appointment key={appointment.id}>
-                                <span>
-                                    <FiClock />
-                                    {appointment.hourFormatted}
-                                </span>
-                                <div>
-                                    <img
-                                        src={appointment.user.avatar_url}
-                                        alt={appointment.user.name}
+                        <h1>LEGUMES</h1>
+                        <ProductsContainer data-testid="foods-list">
+                            {foods &&
+                                foods.map((food) => (
+                                    <Product
+                                        key={food.id}
+                                        food={food}
+                                        handleDelete={handleDeleteFood}
+                                        handleEditFood={handleEditFood}
                                     />
-                                    <strong>{appointment.user.name}</strong>
-                                </div>
-                            </Appointment>
-                        ))} */}
+                                ))}
+                        </FoodsContainer>
                     </Section>
                     <Section>
-                        <strong>Tarde</strong>
-
-                        {/* {afternoonAppointments.length === 0 && (
-                            <p>Nenhum agendamento neste período</p>
-                        )}
-
-                        {afternoonAppointments.map((appointment) => (
-                            <Appointment key={appointment.id}>
-                                <span>
-                                    <FiClock />
-                                    {appointment.hourFormatted}
-                                </span>
-                                <div>
-                                    <img
-                                        src={appointment.user.avatar_url}
-                                        alt={appointment.user.name}
-                                    />
-                                    <strong>{appointment.user.name}</strong>
-                                </div>
-                            </Appointment>
-                        ))} */}
+                        <h1>LEGUMES</h1>
                     </Section>
                 </Schedule>
             </Content>
