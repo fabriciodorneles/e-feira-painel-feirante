@@ -5,55 +5,57 @@ import { FiEdit3, FiTrash } from 'react-icons/fi';
 import { Container } from './styles';
 import api from '../../services/api';
 
-interface IFoodPlate {
+interface IProduct {
     id: number;
     name: string;
-    image: string;
+    avatar: string;
     price: string;
     description: string;
-    available: boolean;
 }
 
 interface IProps {
-    food: IFoodPlate;
+    product: IProduct;
     handleDelete: (id: number) => {};
-    handleEditFood: (food: IFoodPlate) => void;
+    handleEditFood: (food: IProduct) => void;
 }
 
 const Product: React.FC<IProps> = ({
-    food,
+    product,
     handleDelete,
     handleEditFood,
 }: IProps) => {
-    const [isAvailable, setIsAvailable] = useState(food.available);
+    const [isAvailable, setIsAvailable] = useState(true);
 
     async function toggleAvailable(): Promise<void> {
         const updatedFood = {
             available: !isAvailable,
-            name: food.name,
-            image: food.image,
-            description: food.description,
-            price: food.price,
+            name: product.name,
+            image: product.avatar,
+            description: product.description,
+            price: product.price,
         };
-        await api.put(`foods/${food.id}`, updatedFood);
+        await api.put(`foods/${product.id}`, updatedFood);
         setIsAvailable(!isAvailable);
     }
 
     function setEditingFood(): void {
-        handleEditFood(food);
+        handleEditFood(product);
     }
 
     return (
         <Container available={isAvailable}>
             <header>
-                <img src={food.image} alt={food.name} />
+                <img src={product.avatar} alt={product.name} />
             </header>
             <section className="body">
-                <h2>{food.name}</h2>
-                <p>{food.description}</p>
+                <h2>{product.name}</h2>
                 <p className="price">
-                    R$ <b>{food.price}</b>
+                    R$ <b>{product.price}</b> /KG
                 </p>
+                <p className="price">
+                    Estoque: <b>{product.price}</b> KG
+                </p>
+                <p>{product.description}</p>
             </section>
             <section className="footer">
                 <div className="icon-container">
@@ -61,41 +63,42 @@ const Product: React.FC<IProps> = ({
                         type="button"
                         className="icon"
                         onClick={() => setEditingFood()}
-                        data-testid={`edit-food-${food.id}`}
+                        data-testid={`edit-food-${product.id}`}
                     >
                         <FiEdit3 size={20} />
+                        <p> EDITAR </p>
                     </button>
-
                     <button
                         type="button"
                         className="icon"
-                        onClick={() => handleDelete(food.id)}
-                        data-testid={`remove-food-${food.id}`}
+                        onClick={() => handleDelete(product.id)}
+                        data-testid={`remove-food-${product.id}`}
                     >
                         <FiTrash size={20} />
+                        <p> APAGAR </p>
                     </button>
                 </div>
 
-                <div className="availability-container">
+                {/* <div className="availability-container">
                     <p>{isAvailable ? 'Disponível' : 'Indisponível'}</p>
 
                     <label
-                        htmlFor={`available-switch-${food.id}`}
+                        htmlFor={`available-switch-${product.id}`}
                         className="switch"
                     >
                         <input
-                            id={`available-switch-${food.id}`}
+                            id={`available-switch-${product.id}`}
                             type="checkbox"
                             checked={isAvailable}
                             onChange={toggleAvailable}
-                            data-testid={`change-status-food-${food.id}`}
+                            data-testid={`change-status-food-${product.id}`}
                         />
                         <span className="slider" />
                     </label>
-                </div>
+                </div> */}
             </section>
         </Container>
     );
 };
 
-export default Food;
+export default Product;

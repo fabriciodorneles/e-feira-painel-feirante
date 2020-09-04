@@ -78,17 +78,21 @@ export const Schedule = styled.div`
 export const Section = styled.aside`
     margin-top: 48px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
 
+    h1 {
+        align-self: center;
+    }
+
     > strong {
-        color: #999591;
+        /* color: #999591;
         font-size: 20px;
         line-height: 26px;
         border-bottom: 1px solid #3e3b47;
         display: block;
         padding-bottom: 16px;
-        margin-bottom: 16px;
+        margin-bottom: 16px; */
     }
 
     > p {
@@ -97,16 +101,16 @@ export const Section = styled.aside`
 `;
 
 export const ProductsContainer = styled.div`
-    width: 100%;
+    width: 800px;
     max-width: 1280px;
     margin: 0 auto;
     padding: 40px 0;
-    margin-top: -140px;
+    margin-top: 0px;
 
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 32px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 16px;
 `;
 
 export const Appointment = styled.div`

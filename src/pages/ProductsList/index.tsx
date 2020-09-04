@@ -12,25 +12,43 @@ import {
     Appointment,
 } from './styles';
 import logoImg from '../../assets/logo.svg';
+import Product from '../../components/Product';
+import api from '../../services/api';
 
-interface monthAvailabilityItem {
-    day: number;
-    available: boolean;
-}
-
-interface Appointment {
-    id: string;
-    date: string;
-    hourFormatted: string;
-    user: {
-        name: string;
-        avatar_url: string;
-    };
+interface IProduct {
+    id: number;
+    name: string;
+    avatar: string;
+    price: string;
+    description: string;
 }
 
 const Dashboard: React.FC = () => {
-    const [appointments, setAppointments] = useState<Appointment[]>([]);
+    const [products, setProducts] = useState<IProduct[]>([]);
+    // const product: IProduct = {
+    //     id: 1,
+    //     name: 'Banana',
+    //     image:
+    //         'https://www.ibahia.com/fileadmin/user_upload/ibahia/2019/outubro/25/banana.jpg?width=1200&enable=upscale',
+    //     description: 'só se for amarelinha e doce',
+    //     price: '12',
+    // };
 
+    useEffect(() => {
+        async function loadProducts(): Promise<void> {
+            const productsList = (await api.get<IProduct[]>('/products')).data;
+            console.log(productsList);
+            setProducts(productsList);
+        }
+        loadProducts();
+    }, []);
+
+    const handleDeleteFood = useCallback(async (id: number): Promise<void> => {
+        console.log('delete');
+    }, []);
+    const handleEditFood = useCallback(() => {
+        console.log('edit');
+    }, []);
     return (
         <Container>
             <Header>
@@ -39,7 +57,7 @@ const Dashboard: React.FC = () => {
                 </HeaderContent>
 
                 <MenuBar>
-                    <text>VERDURAS</text>
+                    <h1>VERDURAS</h1>
                 </MenuBar>
             </Header>
 
@@ -47,17 +65,17 @@ const Dashboard: React.FC = () => {
                 <Schedule>
                     <Section>
                         <h1>LEGUMES</h1>
-                        <ProductsContainer data-testid="foods-list">
-                            {foods &&
-                                foods.map((food) => (
+                        <ProductsContainer data-testid="products-list">
+                            {products &&
+                                products.map((product) => (
                                     <Product
-                                        key={food.id}
-                                        food={food}
+                                        key={product.id}
+                                        product={product}
                                         handleDelete={handleDeleteFood}
                                         handleEditFood={handleEditFood}
                                     />
                                 ))}
-                        </FoodsContainer>
+                        </ProductsContainer>
                     </Section>
                     <Section>
                         <h1>LEGUMES</h1>
