@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { FiEdit3, FiTrash } from 'react-icons/fi';
 
 import { Container } from './styles';
-import api from '../../services/api';
 
 interface IProduct {
     id: number;
     name: string;
     avatar: string;
     price: string;
+    quantity: string;
     description: string;
 }
 
@@ -26,17 +26,17 @@ const Product: React.FC<IProps> = ({
 }: IProps) => {
     const [isAvailable, setIsAvailable] = useState(true);
 
-    async function toggleAvailable(): Promise<void> {
-        const updatedFood = {
-            available: !isAvailable,
-            name: product.name,
-            image: product.avatar,
-            description: product.description,
-            price: product.price,
-        };
-        await api.put(`foods/${product.id}`, updatedFood);
-        setIsAvailable(!isAvailable);
-    }
+    // async function toggleAvailable(): Promise<void> {
+    //     const updatedFood = {
+    //         available: !isAvailable,
+    //         name: product.name,
+    //         image: product.avatar,
+    //         description: product.description,
+    //         price: product.price,
+    //     };
+    //     await api.put(`foods/${product.id}`, updatedFood);
+    //     setIsAvailable(!isAvailable);
+    // }
 
     function setEditingFood(): void {
         handleEditFood(product);
@@ -53,9 +53,9 @@ const Product: React.FC<IProps> = ({
                     R$ <b>{product.price}</b> /KG
                 </p>
                 <p className="price">
-                    Estoque: <b>{product.price}</b> KG
+                    Estoque: <b>{product.quantity}</b> KG
                 </p>
-                <p>{product.description}</p>
+                <p className="desc">{product.description}</p>
             </section>
             <section className="footer">
                 <div className="icon-container">

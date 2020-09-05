@@ -9,7 +9,10 @@ export const Container = styled.div<IFoodPlateProps>`
     border-radius: 8px;
     justify-content: center;
     font-family: 'Roboto';
-    width: 200px;
+    width: 210px;
+    height: 340px;
+    display: flex;
+    flex-direction: column;
 
     header {
         border-radius: 4px 4px 0px 0px;
@@ -25,21 +28,44 @@ export const Container = styled.div<IFoodPlateProps>`
             `};
 
         img {
-            padding-top: 8px;
-            width: 162px;
+            border-radius: 8px;
+            margin-top: 8px;
+            width: 188px;
+            height: 140px;
+            object-fit: cover;
             pointer-events: none;
             user-select: none;
         }
     }
 
     section.body {
+        flex: 1 0 auto;
         h2 {
+            font-family: 'Roboto';
+            font-weight: 700;
             text-align: center;
             color: #3d3d4d;
         }
 
         p {
+            margin-top: 8px;
+            font-family: 'Roboto';
+            font-weight: 700;
             text-align: center;
+            color: #3d3d4d;
+            padding: 0px 12px;
+        }
+
+        .desc {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 300;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            font-size: 14px;
+            flex: 1;
             color: #3d3d4d;
             padding: 0px 12px;
         }
@@ -69,9 +95,7 @@ export const Container = styled.div<IFoodPlateProps>`
     }
 
     section.footer {
-        display: flex;
-        justify-items: right;
-
+        flex-shrink: 0;
         padding: 8px 8px;
         border-radius: 0px 0px 8px 8px;
 
@@ -81,6 +105,8 @@ export const Container = styled.div<IFoodPlateProps>`
             justify-content: center;
 
             button {
+                font-family: 'Roboto';
+                font-weight: 700;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -93,9 +119,8 @@ export const Container = styled.div<IFoodPlateProps>`
 
                 p {
                     margin: 0px 0px 0px 4px;
-                    font-family: 'Roboto';
                     color: #3d3d4d;
-                    font-size: 12px;
+                    font-size: 14px;
                 }
                 svg {
                     /* color: #3d3d4d; */

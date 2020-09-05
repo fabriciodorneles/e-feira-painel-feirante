@@ -1,54 +1,109 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from 'react';
+import { FiPlusSquare } from 'react-icons/fi';
 import {
     Container,
     Header,
     HeaderContent,
     MenuBar,
     Content,
-    Schedule,
     Section,
     ProductsContainer,
-    Appointment,
 } from './styles';
 import logoImg from '../../assets/logo.svg';
 import Product from '../../components/Product';
 import api from '../../services/api';
+import ModalAddFood from '../../components/ModalAddProduct';
+import ModalEditProduct from '../../components/ModalEditProduct';
 
 interface IProduct {
     id: number;
     name: string;
     avatar: string;
     price: string;
+    quantity: string;
     description: string;
 }
 
 const Dashboard: React.FC = () => {
     const [products, setProducts] = useState<IProduct[]>([]);
-    // const product: IProduct = {
-    //     id: 1,
-    //     name: 'Banana',
-    //     image:
-    //         'https://www.ibahia.com/fileadmin/user_upload/ibahia/2019/outubro/25/banana.jpg?width=1200&enable=upscale',
-    //     description: 'só se for amarelinha e doce',
-    //     price: '12',
-    // };
+    const [editingProduct, setEditingProduct] = useState<IProduct>(
+        {} as IProduct,
+    );
+    const [modalOpen, setModalOpen] = useState(false);
+    const [editModalOpen, setEditModalOpen] = useState(false);
 
     useEffect(() => {
         async function loadProducts(): Promise<void> {
             const productsList = (await api.get<IProduct[]>('/products')).data;
-            console.log(productsList);
             setProducts(productsList);
         }
         loadProducts();
     }, []);
 
-    const handleDeleteFood = useCallback(async (id: number): Promise<void> => {
-        console.log('delete');
-    }, []);
-    const handleEditFood = useCallback(() => {
-        console.log('edit');
-    }, []);
+    async function handleAddFood(product: Omit<IProduct, 'id'>): Promise<void> {
+        try {
+            const productForAdd = {
+                available: true,
+                name: product.name,
+                avatar: product.avatar,
+                description: product.description,
+                price: product.price,
+                quantity: product.quantity,
+            };
+            const newProduct = await api.post('products', productForAdd);
+            if (newProduct) {
+                setProducts([...products, newProduct.data]);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async function handleUpdateProduct(
+        product: Omit<IProduct, 'id' | 'available'>,
+    ): Promise<void> {
+        await api.put(`products/${editingProduct.id}`, product);
+        const newProductsList = products.map((productItem) => {
+            if (productItem.id === editingProduct.id) {
+                const updatedProduct = {
+                    id: editingProduct.id,
+                    name: product.name,
+                    avatar: product.avatar,
+                    description: product.description,
+                    price: product.price,
+                    quantity: product.quantity,
+                };
+                return updatedProduct;
+            }
+            return productItem;
+        });
+        setProducts(newProductsList);
+    }
+
+    const handleDeleteFood = useCallback(
+        async (id: number): Promise<void> => {
+            await api.delete(`products/${id}`);
+            const productsList = products.filter(
+                (product) => product.id !== id,
+            );
+            setProducts(productsList);
+        },
+        [products],
+    );
+
+    function toggleModal(): void {
+        setModalOpen(!modalOpen);
+    }
+
+    function toggleEditModal(): void {
+        setEditModalOpen(!editModalOpen);
+    }
+
+    function handleEditProduct(product: IProduct): void {
+        setEditingProduct(product);
+        toggleEditModal();
+    }
+
     return (
         <Container>
             <Header>
@@ -57,30 +112,48 @@ const Dashboard: React.FC = () => {
                 </HeaderContent>
 
                 <MenuBar>
-                    <h1>VERDURAS</h1>
+                    <h1>PAINEL DE CONTROLE DO FEIRANTE</h1>
                 </MenuBar>
             </Header>
+            <ModalAddFood
+                isOpen={modalOpen}
+                setIsOpen={toggleModal}
+                handleAddFood={handleAddFood}
+            />
+            <ModalEditProduct
+                isOpen={editModalOpen}
+                setIsOpen={toggleEditModal}
+                editingProduct={editingProduct}
+                handleUpdateProduct={handleUpdateProduct}
+            />
 
             <Content>
-                <Schedule>
-                    <Section>
-                        <h1>LEGUMES</h1>
-                        <ProductsContainer data-testid="products-list">
-                            {products &&
-                                products.map((product) => (
-                                    <Product
-                                        key={product.id}
-                                        product={product}
-                                        handleDelete={handleDeleteFood}
-                                        handleEditFood={handleEditFood}
-                                    />
-                                ))}
-                        </ProductsContainer>
-                    </Section>
-                    <Section>
-                        <h1>LEGUMES</h1>
-                    </Section>
-                </Schedule>
+                <h1>PRODUTOS</h1>
+                <button
+                    className="addProduct"
+                    type="button"
+                    onClick={() => {
+                        toggleModal();
+                    }}
+                >
+                    <div className="text">Adicionar novo produto</div>
+                    <div className="icon">
+                        <FiPlusSquare size={24} />
+                    </div>
+                </button>
+                <Section>
+                    <ProductsContainer data-testid="products-list">
+                        {products &&
+                            products.map((product) => (
+                                <Product
+                                    key={product.id}
+                                    product={product}
+                                    handleDelete={handleDeleteFood}
+                                    handleEditFood={handleEditProduct}
+                                />
+                            ))}
+                    </ProductsContainer>
+                </Section>
             </Content>
         </Container>
     );

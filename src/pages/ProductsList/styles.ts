@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
 
 export const Container = styled.div`
-    /* height: 100vh;
     display: flex;
-    align-items: stretch; */
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const Header = styled.div`
+    width: 100%;
+
     height: 255px;
     background: #3bb946;
     display: flex;
@@ -16,7 +18,6 @@ export const Header = styled.div`
 
 export const HeaderContent = styled.div`
     max-width: 1120px;
-
     display: flex;
     align-items: center;
 
@@ -26,7 +27,6 @@ export const HeaderContent = styled.div`
         margin-top: -18px;
         margin-bottom: -61px;
         position: relative;
-        z-index: 1000;
         height: 276px;
     }
 `;
@@ -41,42 +41,41 @@ export const MenuBar = styled.div`
 
 export const Content = styled.main`
     max-width: 1120px;
-    margin: 64px auto;
+    margin-top: 24px;
     display: flex;
-`;
-
-export const Schedule = styled.div`
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     flex: 1;
-    margin-right: 120px;
 
-    h1 {
-        font-size: 36px;
-    }
-
-    p {
-        margin-top: 8px;
-        color: #ff9000;
+    .addProduct {
+        margin-top: 16px;
+        font-family: 'Roboto';
+        color: #1e5323;
+        font-weight: 600;
+        border-radius: 8px;
+        border: 0;
+        background: #39b100;
         display: flex;
+        flex-direction: row;
         align-items: center;
-        font-weight: 500;
 
-        span {
-            display: flex;
-            align-items: center;
+        .text {
+            padding: 16px 24px;
         }
 
-        span + span::before {
-            content: '';
-            width: 1px;
-            height: 12px;
-            background: #ff9000;
-            margin: 0 8px;
+        .icon {
+            display: flex;
+            padding: 12px 12px;
+            background: #41c900;
+            border-radius: 0 8px 8px 0;
+            margin: 0 auto;
         }
     }
 `;
 
 export const Section = styled.aside`
-    margin-top: 48px;
+    margin-top: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,7 +103,7 @@ export const ProductsContainer = styled.div`
     width: 800px;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 40px 0;
+    padding: 0px 0;
     margin-top: 0px;
 
     display: grid;
