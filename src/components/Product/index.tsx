@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { FiEdit3, FiTrash } from 'react-icons/fi';
 
@@ -24,7 +24,7 @@ const Product: React.FC<IProps> = ({
     handleDelete,
     handleEditFood,
 }: IProps) => {
-    const [isAvailable, setIsAvailable] = useState(true);
+    // const [isAvailable, setIsAvailable] = useState(true);
 
     // async function toggleAvailable(): Promise<void> {
     //     const updatedFood = {
@@ -43,7 +43,8 @@ const Product: React.FC<IProps> = ({
     }
 
     return (
-        <Container available={isAvailable}>
+        // <Container available={isAvailable}>
+        <Container>
             <header>
                 <img src={product.avatar} alt={product.name} />
             </header>

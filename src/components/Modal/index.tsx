@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import ReactModal from 'react-modal';
 import { StyledModal } from './styles';
 
 interface IFoodPlate {
