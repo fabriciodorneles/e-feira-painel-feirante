@@ -24,26 +24,11 @@ const Product: React.FC<IProps> = ({
     handleDelete,
     handleEditFood,
 }: IProps) => {
-    // const [isAvailable, setIsAvailable] = useState(true);
-
-    // async function toggleAvailable(): Promise<void> {
-    //     const updatedFood = {
-    //         available: !isAvailable,
-    //         name: product.name,
-    //         image: product.avatar,
-    //         description: product.description,
-    //         price: product.price,
-    //     };
-    //     await api.put(`foods/${product.id}`, updatedFood);
-    //     setIsAvailable(!isAvailable);
-    // }
-
     function setEditingFood(): void {
         handleEditFood(product);
     }
 
     return (
-        // <Container available={isAvailable}>
         <Container>
             <header>
                 <img src={product.avatar} alt={product.name} />
@@ -79,24 +64,6 @@ const Product: React.FC<IProps> = ({
                         <p> APAGAR </p>
                     </button>
                 </div>
-
-                {/* <div className="availability-container">
-                    <p>{isAvailable ? 'Disponível' : 'Indisponível'}</p>
-
-                    <label
-                        htmlFor={`available-switch-${product.id}`}
-                        className="switch"
-                    >
-                        <input
-                            id={`available-switch-${product.id}`}
-                            type="checkbox"
-                            checked={isAvailable}
-                            onChange={toggleAvailable}
-                            data-testid={`change-status-food-${product.id}`}
-                        />
-                        <span className="slider" />
-                    </label>
-                </div> */}
             </section>
         </Container>
     );
