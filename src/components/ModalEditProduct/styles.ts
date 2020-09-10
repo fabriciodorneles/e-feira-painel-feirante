@@ -19,12 +19,13 @@ export const Form = styled(Unform)`
     }
 
     button {
+        margin-top: 16px;
+        font-family: 'Roboto';
+        color: #1e5323;
         font-weight: 600;
         border-radius: 8px;
         border: 0;
         background: #39b100;
-        color: #fff;
-
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -35,7 +36,7 @@ export const Form = styled(Unform)`
 
         .icon {
             display: flex;
-            padding: 16px 16px;
+            padding: 12px 12px;
             background: #41c900;
             border-radius: 0 8px 8px 0;
             margin: 0 auto;

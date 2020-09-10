@@ -9,7 +9,6 @@ export const Container = styled.div`
 
 export const Header = styled.div`
     width: 100%;
-
     height: 255px;
     background: #3bb946;
     display: flex;
@@ -20,14 +19,27 @@ export const HeaderContent = styled.div`
     max-width: 1120px;
     display: flex;
     align-items: center;
+    flex: 1 0 auto;
+    @media (max-width: 1260px) {
+        justify-content: center;
+    }
 
     > img {
+        @media (min-width: 1260px) {
+            display: flex;
+            margin-left: 20px;
+            margin-top: -18px;
+            margin-bottom: -61px;
+            position: relative;
+            height: 276px;
+        }
         display: flex;
-        margin-left: 20px;
-        margin-top: -18px;
-        margin-bottom: -61px;
+        height: 180px;
         position: relative;
-        height: 276px;
+
+        @media (max-width: 580px) {
+            height: 150px;
+        }
     }
 `;
 
@@ -37,6 +49,14 @@ export const MenuBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+
+    @media (max-width: 580px) {
+        height: 90px;
+        h1 {
+            text-align: center;
+        }
+    }
 `;
 
 export const Content = styled.main`
@@ -100,7 +120,7 @@ export const Section = styled.aside`
 `;
 
 export const ProductsContainer = styled.div`
-    width: 800px;
+    width: 900px;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0px 0;
@@ -110,50 +130,16 @@ export const ProductsContainer = styled.div`
 
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 16px;
-`;
 
-export const Appointment = styled.div`
-    display: flex;
-    align-items: center;
-
-    & + div {
-        margin-top: 16px;
+    @media (max-width: 930px) {
+        width: 675px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 12px;
     }
 
-    span {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        color: #f4ede8;
-        width: 70px;
-
-        svg {
-            color: #ff9000;
-            margin-right: 8px;
-        }
-    }
-
-    div {
-        flex: 1;
-        background: #3e3b47;
-        display: flex;
-        align-items: center;
-        padding: 16px 24px;
-        border-radius: 10px;
-        margin-left: 24px;
-
-        img {
-            object-fit: cover;
-
-            height: 56px;
-            width: 56px;
-            border-radius: 50%;
-        }
-
-        strong {
-            margin-left: 24px;
-            font-size: 20px;
-            color: #fff;
-        }
+    @media (max-width: 700px) {
+        width: 450px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 12px;
     }
 `;
