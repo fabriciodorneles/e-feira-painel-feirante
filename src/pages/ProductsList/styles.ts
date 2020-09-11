@@ -57,6 +57,14 @@ export const MenuBar = styled.div`
             text-align: center;
         }
     }
+    @media (max-width: 450px) {
+        height: 80px;
+        h1 {
+            max-width: 300px;
+            text-align: center;
+            font-size: 23px;
+        }
+    }
 `;
 
 export const Content = styled.main`
@@ -91,6 +99,11 @@ export const Content = styled.main`
             border-radius: 0 8px 8px 0;
             margin: 0 auto;
         }
+        @media (max-width: 450px) {
+            .text {
+                padding: 10px 14px;
+            }
+        }
     }
 `;
 
@@ -112,10 +125,6 @@ export const Section = styled.aside`
 export const ProductsContainer = styled.div`
     width: 900px;
     max-width: 1280px;
-    margin: 0 auto;
-    padding: 0px 0;
-    margin-top: 0px;
-
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
@@ -131,5 +140,11 @@ export const ProductsContainer = styled.div`
         width: 450px;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 12px;
+    }
+
+    @media (max-width: 450px) {
+        width: 270px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 6px;
     }
 `;

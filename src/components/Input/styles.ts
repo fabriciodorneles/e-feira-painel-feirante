@@ -17,6 +17,9 @@ export const Container = styled.div<IContainerProps>`
 
     & + div {
         margin-top: 24px;
+        @media (max-width: 450px) {
+            margin-top: 12px;
+        }
     }
 
     h1 {

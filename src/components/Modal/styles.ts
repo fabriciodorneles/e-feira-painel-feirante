@@ -12,8 +12,12 @@ export const StyledModal = styled(ReactModal)`
     color: #000000;
     border-radius: 8px;
     width: 736px;
+    border: none;
     @media (max-width: 750px) {
         width: 450px;
     }
-    border: none;
+    @media (max-width: 450px) {
+        width: 330px;
+        padding: 8px;
+    }
 `;

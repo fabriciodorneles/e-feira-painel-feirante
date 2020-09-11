@@ -9,6 +9,10 @@ export const Container = styled.div`
     height: 340px;
     display: flex;
     flex-direction: column;
+    @media (max-width: 450px) {
+        width: 130px;
+        height: 280px;
+    }
 
     header {
         border-radius: 4px 4px 0px 0px;
@@ -25,6 +29,13 @@ export const Container = styled.div`
             object-fit: cover;
             pointer-events: none;
             user-select: none;
+        }
+        @media (max-width: 450px) {
+            height: 120px;
+            img {
+                width: 115px;
+                height: 100px;
+            }
         }
     }
 
@@ -78,6 +89,25 @@ export const Container = styled.div`
                 padding: 0px 8px;
             }
         }
+        @media (max-width: 450px) {
+            h2 {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .desc {
+                margin-top: 6px;
+            }
+
+            .price {
+                font-size: 10x;
+                line-height: 10px;
+                padding: 0px 10px;
+            }
+        }
     }
 
     section.footer {
@@ -110,7 +140,14 @@ export const Container = styled.div`
                 }
 
                 & + button {
-                    margin-left: 12px;
+                    margin-left: 8px;
+                }
+
+                @media (max-width: 450px) {
+                    flex-direction: column;
+                    p {
+                        font-size: 8px;
+                    }
                 }
             }
         }

@@ -11,6 +11,10 @@ export const Form = styled(Unform)`
         font-size: 36px;
         line-height: 36px;
         margin-bottom: 40px;
+        @media (max-width: 450px) {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
     }
 
     button {
