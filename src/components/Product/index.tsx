@@ -49,7 +49,6 @@ const Product: React.FC<IProps> = ({
                         type="button"
                         className="icon"
                         onClick={() => setEditingFood()}
-                        data-testid={`edit-food-${product.id}`}
                     >
                         <FiEdit3 size={20} />
                         <p> EDITAR </p>
@@ -58,7 +57,6 @@ const Product: React.FC<IProps> = ({
                         type="button"
                         className="icon"
                         onClick={() => handleDelete(product.id)}
-                        data-testid={`remove-food-${product.id}`}
                     >
                         <FiTrash size={20} />
                         <p> APAGAR </p>

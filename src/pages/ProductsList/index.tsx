@@ -82,7 +82,7 @@ const Dashboard: React.FC = () => {
 
     const handleDeleteFood = useCallback(
         async (id: number): Promise<void> => {
-            await api.delete(`products/${id}`);
+            // await api.delete(`products/${id}`);
             const productsList = products.filter(
                 (product) => product.id !== id,
             );
